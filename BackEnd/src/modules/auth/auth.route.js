@@ -13,3 +13,5 @@ router.post(
 );
 router.post("/login", validation(authvalidations.login), auth.login);
 export default router;
+
+router.post("/logout", auth.logout);
