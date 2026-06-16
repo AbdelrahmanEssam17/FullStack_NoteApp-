@@ -1,1 +1,1 @@
-import joi 
+import joi from "joi";
