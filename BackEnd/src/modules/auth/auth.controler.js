@@ -8,9 +8,9 @@ export const register = async (req, res) => {
     "INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *",
     [username, email, hashedpassword],
   );
-
   res.status(201).json(result.rows[0]);
 };
+
 export const login = async (req, res, next) => {
   const { email, password } = req.body;
   const result = await pool.query("select * from users where email =$1", [
