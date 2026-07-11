@@ -9,7 +9,7 @@ export const verifyToken = (req, res, next) => {
     return res.status(401).json({ message: "Invalid token format" });
   }
   try {
-    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    const decoded = jwt.verify(token, process.env.SECERT_KEY);
     req.user = decoded;
     next();
   } catch (error) {
