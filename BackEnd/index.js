@@ -9,6 +9,7 @@ import wishlistroute from "./src/modules/wishlist/wishlist.route.js";
 import cors from "cors";
 import limiter from "express-rate-limit";
 import helmet from "helmet";
+import { otpCleanupCron } from "./src/middleware/deleteOtp.js";
 dotenv.config();
 pool
   .connect()
@@ -31,6 +32,7 @@ app.use("/user", userroute);
 app.use("/auth", authroute);
 app.use("/note", noteroute);
 app.use("/wishlist", wishlistroute);
+otpCleanupCron();
 app.use(globalErrorhandling);
 const port = process.env.PORT;
 
