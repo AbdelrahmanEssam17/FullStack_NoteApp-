@@ -56,5 +56,22 @@ export const uploadProfileImage = async (req, res, next) => {
   }
 };
 
-
-export 
+export const updatepassword = async (req, res, next) => {
+  const { oldpassword, newpassword, confirmpassword } = req.body;
+  const { id: user_id } = req.user;
+  if (!oldpassword || newPassword || confirmpassword) {
+    return res.status(400).json({
+      success: false,
+      message: "All fields are required",
+    });
+  }
+  if (newPassword !== confirmPassword) {
+    return res.status(400).json({
+      success: false,
+      message: "Passwords do not match",
+    });
+  }
+  const result = await pool.query(`select password from users where id =$1`, [
+    id,
+  ]);
+};
