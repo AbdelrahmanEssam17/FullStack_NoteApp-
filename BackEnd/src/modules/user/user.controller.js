@@ -34,19 +34,25 @@ export const updateuser = async (req, res, next) => {
 };
 //problem
 export const deleteuserbyid = async (req, res, next) => {
-  const { id } = req.params;
+  try {
+    const { id } = req.params;
 
-  const deletebyid = await pool.query("DELETE FROM users WHERE id = $1", [id]);
+    const deletebyid = await pool.query("DELETE FROM users WHERE id = $1", [
+      id,
+    ]);
 
-  if (deletebyid.rowCount === 0) {
-    return res.status(404).json({
-      message: "user not found",
+    if (deletebyid.rowCount === 0) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    return res.status(200).json({
+      message: "User deleted successfully",
     });
+  } catch (error) {
+    next(error);
   }
-
-  return res.status(200).json({
-    message: "user deleted successfully",
-  });
 };
 
 export const deletealluser = async (req, res, next) => {

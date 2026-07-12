@@ -27,9 +27,13 @@ export const login = async (req, res, next) => {
   if (!isMatch) {
     return res.status(401).json({ message: "password mismatch" });
   }
-  const token = jwt.sign({ id: users.id }, process.env.SECERT_KEY, {
-    expiresIn: "1d",
-  });
+  const token = jwt.sign(
+    { id: users.id, role: users.role },
+    process.env.SECERT_KEY,
+    {
+      expiresIn: "1d",
+    },
+  );
   return res.status(200).json({
     message: "login success",
     token,
@@ -57,21 +61,46 @@ export const uploadProfileImage = async (req, res, next) => {
 };
 
 export const updatepassword = async (req, res, next) => {
-  const { oldpassword, newpassword, confirmpassword } = req.body;
-  const { id: user_id } = req.user;
-  if (!oldpassword || newPassword || confirmpassword) {
-    return res.status(400).json({
-      success: false,
-      message: "All fields are required",
+  try {
+    const { oldpassword, confirmpassword, newpassword } = req.body;
+    const { id: user_id } = req.user;
+    if (!oldpassword || !confirmpassword || !newpassword) {
+      return res.status(400).json({
+        message: "All fields are required",
+      });
+    }
+    if (confirmpassword !== newpassword) {
+      return res.status(400).json({
+        message: "Password mismatch",
+      });
+    }
+    const result = await pool.query(
+      `SELECT password FROM users WHERE id = $1`,
+      [user_id],
+    );
+    if (result.rowCount === 0) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+    const hashedPassword = result.rows[0].password;
+    const isMatch = await bcrypt.compare(oldpassword, hashedPassword);
+    if (!isMatch) {
+      return res.status(401).json({
+        message: "Old password is incorrect",
+      });
+    }
+    const hashedNewPassword = await bcrypt.hash(newpassword, 8);
+    await pool.query(
+      `UPDATE users 
+       SET password = $1 
+       WHERE id = $2`,
+      [hashedNewPassword, user_id],
+    );
+    return res.status(200).json({
+      message: "Password updated successfully",
     });
+  } catch (error) {
+    next(error);
   }
-  if (newPassword !== confirmPassword) {
-    return res.status(400).json({
-      success: false,
-      message: "Passwords do not match",
-    });
-  }
-  const result = await pool.query(`select password from users where id =$1`, [
-    id,
-  ]);
 };

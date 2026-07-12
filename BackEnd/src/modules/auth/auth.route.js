@@ -22,5 +22,5 @@ router.patch(
   upload.single("image"),
   auth.uploadProfileImage,
 );
-
+router.patch("/update-password", verifyToken, auth.updatepassword);
 export default router;
