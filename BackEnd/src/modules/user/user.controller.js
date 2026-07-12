@@ -18,8 +18,8 @@ export const updateuser = async (req, res, next) => {
   const { username, password, email } = req.body;
 
   const result = await pool.query(
-    "UPDATE users SET username = $1, password = $2, email = $3 WHERE id = $4",
-    [username, password, email, id],
+    "UPDATE users SET username = $1, , email = $2 WHERE id = $3",
+    [username, email, id],
   );
 
   if (result.rowCount === 0) {

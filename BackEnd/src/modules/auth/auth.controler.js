@@ -1,6 +1,9 @@
 import pool from "../../DB/db.connection.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { Readable } from "stream";
+
+import cloudinary from "../../utlis/cloudinary/cloudinary.js";
 export const register = async (req, res) => {
   const { username, email, password } = req.body;
   const hashedpassword = await bcrypt.hash(password, 8);
@@ -34,8 +37,24 @@ export const login = async (req, res, next) => {
   });
 };
 
-export const logout = async (req, res, next) => {
-  return res.status(200).json({
-    message: "logout success",
-  });
+export const uploadProfileImage = async (req, res, next) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({
+        success: false,
+        message: "Please upload an image",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Image uploaded successfully",
+      file: req.file,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
+
+
+export 

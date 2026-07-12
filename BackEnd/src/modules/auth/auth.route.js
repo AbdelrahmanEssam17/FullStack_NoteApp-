@@ -1,9 +1,11 @@
 import express from "express";
 import * as auth from "./auth.controler.js";
-const router = express();
+import upload from "../../middleware/multer.js";
+const router = express.Router();
 import validation from "../../middleware/validation.middleware.js";
 import * as authvalidations from "./auth.validation.js";
 import { emailExist } from "../../middleware/emailExist.js";
+import { verifyToken } from "../../middleware/auth.middleware.js";
 
 router.post(
   "/register",
@@ -12,6 +14,13 @@ router.post(
   auth.register,
 );
 router.post("/login", validation(authvalidations.login), auth.login);
-export default router;
 
-router.post("/logout", auth.logout);
+// router.post("/logout", auth.logout);
+router.patch(
+  "/profile/image",
+  verifyToken,
+  upload.single("image"),
+  auth.uploadProfileImage,
+);
+
+export default router;
