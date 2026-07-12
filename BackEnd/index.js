@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import { globalErrorhandling } from "./src/utlis/error/error.handling.js";
 import pool from "./src/DB/db.connection.js";
 import authroute from "./src/modules/auth/auth.route.js";
 import userroute from "./src/modules/user/user.route.js";
@@ -8,6 +9,7 @@ import wishlistroute from "./src/modules/wishlist/wishlist.route.js";
 import cors from "cors";
 import limiter from "express-rate-limit";
 import helmet from "helmet";
+import { otpCleanupCron } from "./src/middleware/deleteOtp.js";
 dotenv.config();
 pool
   .connect()
@@ -25,11 +27,15 @@ app.use(express.json());
 app.use(helmet());
 app.use(limter);
 app.use(cors());
+
 app.use("/user", userroute);
 app.use("/auth", authroute);
 app.use("/note", noteroute);
 app.use("/wishlist", wishlistroute);
+otpCleanupCron();
+app.use(globalErrorhandling);
 const port = process.env.PORT;
+
 app.listen(process.env.PORT, () => {
   console.log(`"server is running in "${port}`);
 });

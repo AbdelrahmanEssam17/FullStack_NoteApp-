@@ -16,3 +16,15 @@ export const verifyToken = (req, res, next) => {
     return res.status(401).json({ message: "Invalid token" });
   }
 };
+
+export const isAdmin = (...roles) => {
+  return (req, res, next) => {
+    const userRole = req.user.role;
+    if (!roles.includes(userRole)) {
+      return res.status(403).json({
+        message: "You are not authorized",
+      });
+    }
+    next();
+  };
+};
