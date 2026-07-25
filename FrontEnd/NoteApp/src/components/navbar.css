@@ -1,0 +1,32 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(58, 58, 198);
+  height: 50px;
+  padding: 0 30px;
+  color: rgb(199, 190, 190);
+  font-size: 24px;
+}
+
+.linkss {
+  display: flex;
+  gap: 20px;
+  font-size: 18px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.point {
+  text-decoration: none;
+  color: rgb(199, 190, 190);
+}
+
+.point:hover {
+  color: rgb(134, 83, 83);
+}
+.logout {
+  background-color: rgb(58, 58, 198);
+  color: white;
+}

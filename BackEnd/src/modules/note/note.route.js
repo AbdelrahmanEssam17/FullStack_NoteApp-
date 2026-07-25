@@ -14,7 +14,7 @@ router.get("/getbyid/:note_id", notes.getnotebyid);
 router.get("/getall", notes.getallnote);
 router.patch("/update/:note_id", verifyToken, notes.updatenote);
 router.delete("/delete/:note_id", verifyToken, notes.deletenotebyid);
-router.delete("/delete", verifyToken, notes.deleteallnote);
+router.delete("/deleteall", verifyToken, notes.deleteallnote);
 router.get("/getnotebyuser", verifyToken, notes.gelallnotebyuser);
 
 export default router;
