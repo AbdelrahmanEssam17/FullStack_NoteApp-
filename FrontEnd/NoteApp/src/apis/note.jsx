@@ -1,48 +1,54 @@
 import axios from "axios";
 
-const addnote = async () => {
+const API_BASE = "http://localhost:3002";
+
+const addnote = async (description) => {
   try {
     const response = await axios.post("http://localhost:3002/note/addnote", {
-      description: "hello",
+      description,
     });
 
-    console.log(response.data);
+    return response.data;
   } catch (error) {
-    console.log(error.response?.data);
+    throw error.response?.data || error.message;
   }
 };
 
 const deleteall = async () => {
   try {
-    const response = await axios.post("http://localhost:3002/note/deleteall");
+    const response = await axios.delete("http://localhost:3002/note/deleteall");
 
-    console.log(response.data);
+    return response.data;
   } catch (error) {
-    console.log(error.response?.data);
+    throw error.response?.data || error.message;
   }
 };
 
-const update = async () => {
+const update = async (note_id, description) => {
   try {
-    const response = await axios.post("http://localhost:3002/note/update", {
-      note_id: "1",
-      description: "updated note",
-    });
+    const response = await axios.patch(
+      `http://localhost:3002/note/update/${note_id}`,
+      {
+        description,
+      },
+    );
 
-    console.log(response.data);
+    return response.data;
   } catch (error) {
-    console.log(error.response?.data);
+    throw error.response?.data || error.message;
   }
 };
 
-const deletebyid = async () => {
+const deletebyid = async (note_id) => {
   try {
-    const response = await axios.post("http://localhost:3002/note/delete", {
-      note_id: "1",
-    });
+    const response = await axios.delete(
+      `http://localhost:3002/note/delete/${note_id}`,
+    );
 
-    console.log(response.data);
+    return response.data;
   } catch (error) {
-    console.log(error.response?.data);
+    throw error.response?.data || error.message;
   }
 };
+
+export { addnote, deleteall, update, deletebyid };

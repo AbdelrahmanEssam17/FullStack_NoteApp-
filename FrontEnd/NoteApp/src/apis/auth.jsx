@@ -1,40 +1,44 @@
 import axios from "axios";
 
-const register = async () => {
+const API_BASE = "http://localhost:3003";
+
+const register = async (username, email, password) => {
   try {
     const response = await axios.post("http://localhost:3003/auth/register", {
-      username: "abdo",
-      email: "eabdo6990110@gmail.com",
-      password: "abdo@#$AA123",
+      username,
+      email,
+      password,
     });
 
-    console.log(response.data);
+    return response.data;
   } catch (error) {
-    console.log(error.response?.data);
+    throw error.response?.data || error.message;
   }
 };
 
-const login = async () => {
+const login = async (username, password) => {
   try {
     const response = await axios.post("http://localhost:3003/auth/login", {
-      username: "abdoessam",
-      password: "123####55saA",
+      username,
+      password,
     });
 
-    console.log(response.data);
+    return response.data;
   } catch (error) {
-    console.log(error.response?.data);
+    throw error.response?.data || error.message;
   }
 };
-const verifyOTP = async () => {
+const verifyOTP = async (email, otp) => {
   try {
     const response = await axios.post("http://localhost:3003/auth/verify-otp", {
-      email: "eabdo6990110@gmail.com",
-      otp: "123456",
+      email,
+      otp,
     });
 
-    console.log(response.data);
+    return response.data;
   } catch (error) {
-    console.log(error.response?.data);
+    throw error.response?.data || error.message;
   }
 };
+
+export { register, login, verifyOTP };
