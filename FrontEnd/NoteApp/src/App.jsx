@@ -2,6 +2,7 @@ import React from "react";
 import Login from "./pages/login/login";
 import Signup from "./pages/signup/signup";
 import Navbarlayout from "./layout/navbar.layout";
+import Otp from "./pages/otp/otp";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "signup",
         element: <Signup />,
+      },
+      {
+        path: "otp",
+        element: <Otp />,
       },
     ],
   },

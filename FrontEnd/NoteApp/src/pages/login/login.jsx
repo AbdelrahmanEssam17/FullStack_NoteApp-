@@ -22,7 +22,10 @@ export default function Login() {
           submit
         </button>
         <p>
-          dont have an a account <Link to="/Signup">signup</Link>
+          dont have an a account{" "}
+          <Link to="/Signup" className="link">
+            signup
+          </Link>
         </p>
       </div>
     </div>
