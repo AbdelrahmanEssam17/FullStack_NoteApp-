@@ -1,0 +1,16 @@
+.divs {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.buttonn {
+  margin-left: auto;
+  width: 100px;
+  height: 60px;
+  border-radius: 30px;
+  background-color: rgb(28, 153, 153);
+  color: white;
+  border: none;
+  cursor: pointer;
+}

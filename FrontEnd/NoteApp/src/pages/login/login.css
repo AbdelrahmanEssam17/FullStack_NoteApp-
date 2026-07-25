@@ -5,6 +5,7 @@
   width: 300px;
   margin: 40px auto;
   font-size: 20px;
+  border-radius: 3px;
 }
 
 .label {
@@ -20,9 +21,14 @@
 .submit {
   width: 100%;
   height: 35px;
-  background-color: rgb(28, 153, 153);
+  background-color: rgb(1, 27, 112);
+  border-radius: 30px;
+  color: white;
 }
 
 .link {
   text-decoration: none;
+}
+.para {
+  size: 30px;
 }

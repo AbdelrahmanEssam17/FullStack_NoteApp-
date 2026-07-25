@@ -6,6 +6,8 @@ export default function Signup() {
   return (
     <div className="bigdiv">
       <div className="buttons">
+        <h2>create your account</h2>
+        <p>start capturing you thourgh with clarity </p>
         <label htmlFor="username" className="label">
           username
         </label>
@@ -27,7 +29,7 @@ export default function Signup() {
           className="hello"
         />
         <button type="submit" className="submit">
-          submit
+          create account
         </button>
         <p>
           already have an account{" "}

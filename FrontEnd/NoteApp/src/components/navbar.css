@@ -26,3 +26,7 @@
 .point:hover {
   color: rgb(134, 83, 83);
 }
+.logout {
+  background-color: rgb(58, 58, 198);
+  color: white;
+}

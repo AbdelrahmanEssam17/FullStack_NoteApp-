@@ -1,8 +1,13 @@
 import React from "react";
 import "./navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Navbar() {
+  const location = useLocation();
+
+  const isAuthPage =
+    location.pathname === "/login" || location.pathname === "/signup";
+
   return (
     <div className="bigdiv">
       <div className="navbar">
@@ -10,21 +15,25 @@ export default function Navbar() {
 
         <div className="links">
           <ul className="linkss">
-            <li>
-              <Link to="/login" className="point">
-                Login
-              </Link>
-            </li>
+            {isAuthPage ? (
+              <>
+                <li>
+                  <Link to="/login" className="point">
+                    Login
+                  </Link>
+                </li>
 
-            <li>
-              <Link to="/signup" className="point">
-                Signup
-              </Link>
-            </li>
-
-            <li>
-              <button>logout</button>
-            </li>
+                <li>
+                  <Link to="/signup" className="point">
+                    Signup
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <li>
+                <button className="logout">Logout</button>
+              </li>
+            )}
           </ul>
         </div>
       </div>

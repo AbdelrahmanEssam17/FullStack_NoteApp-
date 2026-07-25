@@ -1,30 +1,41 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Signup from "../signup/signup";
 import "./login.css";
-export default function Login() {
+
+export default function Login(title = "login") {
   return (
     <div className="bigdiv">
       <div className="buttons">
+        <h2>Welcome Back</h2>
+
+        <p>
+          Enter your credentials to access your
+          <br />
+          workspace.
+        </p>
+
         <label htmlFor="email" className="label">
-          email
+          Email
         </label>
-        <input type="email" placeholder="enter your email" className="hello" />
+        <input type="email" placeholder="Enter your email" className="hello" />
+
         <label htmlFor="password" className="label">
-          password
+          Password
         </label>
         <input
           type="password"
-          placeholder="enter your password"
+          placeholder="Enter your password"
           className="hello"
         />
+
         <button type="submit" className="submit">
-          submit
+          Login to workspace
         </button>
+
         <p>
-          dont have an a account{" "}
-          <Link to="/Signup" className="link">
-            signup
+          Don't have an account?{" "}
+          <Link to="/signup" className="link">
+            Sign up
           </Link>
         </p>
       </div>

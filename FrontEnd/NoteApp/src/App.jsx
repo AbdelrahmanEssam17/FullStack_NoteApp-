@@ -3,6 +3,7 @@ import Login from "./pages/login/login";
 import Signup from "./pages/signup/signup";
 import Navbarlayout from "./layout/navbar.layout";
 import Otp from "./pages/otp/otp";
+import Home from "./pages/home/home";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "otp",
         element: <Otp />,
+      },
+      {
+        path: "home",
+        element: <Home />,
       },
     ],
   },
