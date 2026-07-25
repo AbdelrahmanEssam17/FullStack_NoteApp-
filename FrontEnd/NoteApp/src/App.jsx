@@ -1,10 +1,11 @@
 import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import AuthProvider from "./context/AuthContext";
+import Navbarlayout from "./layout/navbar.layout";
 import Login from "./pages/login/login";
 import Signup from "./pages/signup/signup";
-import Navbarlayout from "./layout/navbar.layout";
 import Otp from "./pages/otp/otp";
 import Home from "./pages/home/home";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
@@ -36,5 +37,9 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  );
 }

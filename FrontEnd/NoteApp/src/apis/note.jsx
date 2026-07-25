@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const API_BASE = "http://localhost:3002";
+const API_BASE = "http://localhost:3003";
 
 const addnote = async (description) => {
   try {
-    const response = await axios.post("http://localhost:3002/note/addnote", {
+    const response = await axios.post(`${API_BASE}/note/addnote`, {
       description,
     });
 
@@ -16,7 +16,7 @@ const addnote = async (description) => {
 
 const deleteall = async () => {
   try {
-    const response = await axios.delete("http://localhost:3002/note/deleteall");
+    const response = await axios.delete(`${API_BASE}/note/deleteall`);
 
     return response.data;
   } catch (error) {

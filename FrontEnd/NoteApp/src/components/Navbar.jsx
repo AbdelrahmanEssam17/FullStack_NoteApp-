@@ -1,21 +1,34 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./navbar.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Navbar() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { token, logout } = useContext(AuthContext);
 
   const isAuthPage =
     location.pathname === "/login" || location.pathname === "/signup";
 
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
+
   return (
     <div className="bigdiv">
       <div className="navbar">
-        <p>Note app</p>
+        <p
+          onClick={() => navigate(token ? "/home" : "/login")}
+          style={{ cursor: "pointer" }}
+        >
+          Note app
+        </p>
 
         <div className="links">
           <ul className="linkss">
-            {isAuthPage ? (
+            {!token || isAuthPage ? (
               <>
                 <li>
                   <Link to="/login" className="point">
@@ -31,7 +44,9 @@ export default function Navbar() {
               </>
             ) : (
               <li>
-                <button className="logout">Logout</button>
+                <button className="logout" onClick={handleLogout}>
+                  Logout
+                </button>
               </li>
             )}
           </ul>

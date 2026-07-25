@@ -4,7 +4,7 @@ import "./otp.css";
 export default function Otp() {
   const handlechange = (e, index) => {
     const choosen = document.querySelectorAll(".square");
-    if (e.target.value && index <= choosen.length - 1) {
+    if (e.target.value && index <= inputs.length - 1) {
       choosen[index + 1].focus();
     }
   };

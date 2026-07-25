@@ -161,7 +161,6 @@ export const verifyOtp = async (req, res, next) => {
       `
       UPDATE users
       SET 
-        is_verified = true,
         otp = NULL,
         otp_expire = NULL
       WHERE email = $1

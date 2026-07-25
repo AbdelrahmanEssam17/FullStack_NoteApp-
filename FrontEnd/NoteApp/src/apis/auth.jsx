@@ -4,7 +4,7 @@ const API_BASE = "http://localhost:3003";
 
 const register = async (username, email, password) => {
   try {
-    const response = await axios.post("http://localhost:3003/auth/register", {
+    const response = await axios.post(`${API_BASE}/auth/register`, {
       username,
       email,
       password,
@@ -16,10 +16,10 @@ const register = async (username, email, password) => {
   }
 };
 
-const login = async (username, password) => {
+const login = async (email, password) => {
   try {
-    const response = await axios.post("http://localhost:3003/auth/login", {
-      username,
+    const response = await axios.post(`${API_BASE}/auth/login`, {
+      email,
       password,
     });
 
@@ -30,7 +30,7 @@ const login = async (username, password) => {
 };
 const verifyOTP = async (email, otp) => {
   try {
-    const response = await axios.post("http://localhost:3003/auth/verify-otp", {
+    const response = await axios.post(`${API_BASE}/auth/verify-otp`, {
       email,
       otp,
     });

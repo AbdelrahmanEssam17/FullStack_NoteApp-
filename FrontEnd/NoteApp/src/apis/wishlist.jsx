@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const API_BASE = "http://localhost:3002";
+const API_BASE = "http://localhost:3003";
 
 const getall = async () => {
   try {
-    const response = await axios.get("http://localhost:3002/wishlist/getall");
+    const response = await axios.get(`${API_BASE}/wishlist/getall`);
     return response.data;
   } catch (error) {
     throw error.response?.data || error.message;
@@ -13,9 +13,7 @@ const getall = async () => {
 
 const deleteall = async () => {
   try {
-    const response = await axios.delete(
-      "http://localhost:3002/wishlist/deleteall",
-    );
+    const response = await axios.delete(`${API_BASE}/wishlist/deleteall`);
     return response.data;
   } catch (error) {
     throw error.response?.data || error.message;
@@ -24,12 +22,9 @@ const deleteall = async () => {
 
 const addtowithlist = async (note_id) => {
   try {
-    const response = await axios.post(
-      "http://localhost:3002/wishlist/addtowithlist",
-      {
-        note_id,
-      },
-    );
+    const response = await axios.post(`${API_BASE}/wishlist/addtowithlist`, {
+      note_id,
+    });
     return response.data;
   } catch (error) {
     throw error.response?.data || error.message;
@@ -39,7 +34,7 @@ const addtowithlist = async (note_id) => {
 const removefrom = async (note_id) => {
   try {
     const response = await axios.delete(
-      `http://localhost:3002/wishlist/remove-from/${note_id}`,
+      `${API_BASE}/wishlist/remove-from/${note_id}`,
     );
     return response.data;
   } catch (error) {
